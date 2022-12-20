@@ -3,6 +3,7 @@ import Quotes from "./pages/Quotes";
 import QuoteDetail from "./pages/QuoteDetail";
 import NewQuote from "./pages/NewQuote";
 import Layout from "./components/layout/Layout";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/new_quote">
             <NewQuote />
+          </Route>
+          <Route path="*">
+            <ErrorPage />
           </Route>
         </Switch>
       </Layout>
