@@ -4,15 +4,16 @@ import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
 import { useHistory, useLocation } from "react-router-dom";
 
-const sortQuotes = (quotes, ascending) => {
-  return quotes.sort((quoteA, quoteB) => {
-    if (ascending) {
-      return quoteA.id > quoteB.id ? 1 : -1;
-    } else {
-      return quoteA.id < quoteB.id ? 1 : -1;
-    }
-  });
-};
+const sortQuotes = (quotes, ascending) =>
+  quotes.sort((quoteA, quoteB) =>
+    ascending
+      ? quoteA.id > quoteB.id
+        ? 1
+        : -1
+      : quoteA.id < quoteB.id
+      ? 1
+      : -1
+  );
 
 const QuoteList = (props) => {
   const history = useHistory();
@@ -21,7 +22,10 @@ const QuoteList = (props) => {
   const isSortingAscending = queryParams.get("sort") === "asc";
   const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
   const changeSortingHandler = () => {
-    history.push(`/quotes?sort=${isSortingAscending ? "desc" : "asc"}`);
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
+    });
   };
   return (
     <Fragment>
